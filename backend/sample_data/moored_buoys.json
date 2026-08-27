@@ -1,0 +1,90 @@
+[
+  {
+    "id": "BD08",
+    "name": "OMNI Buoy BD08 (Bay of Bengal)",
+    "lat": 18.2,
+    "lon": 89.7,
+    "sst": 29.4,
+    "sss": 31.8,
+    "wind_speed": 14.5,
+    "wave_height": 2.4,
+    "current_speed": 0.42
+  },
+  {
+    "id": "BD09",
+    "name": "OMNI Buoy BD09 (Bay of Bengal)",
+    "lat": 17.5,
+    "lon": 89.2,
+    "sst": 29.1,
+    "sss": 32.2,
+    "wind_speed": 16.0,
+    "wave_height": 2.6,
+    "current_speed": 0.48
+  },
+  {
+    "id": "BD10",
+    "name": "OMNI Buoy BD10 (Bay of Bengal)",
+    "lat": 14.0,
+    "lon": 87.0,
+    "sst": 28.8,
+    "sss": 33.5,
+    "wind_speed": 15.2,
+    "wave_height": 2.2,
+    "current_speed": 0.38
+  },
+  {
+    "id": "BD11",
+    "name": "OMNI Buoy BD11 (Bay of Bengal)",
+    "lat": 13.5,
+    "lon": 84.0,
+    "sst": 28.9,
+    "sss": 33.8,
+    "wind_speed": 13.8,
+    "wave_height": 2.0,
+    "current_speed": 0.35
+  },
+  {
+    "id": "AD06",
+    "name": "OMNI Buoy AD06 (Arabian Sea)",
+    "lat": 18.5,
+    "lon": 67.4,
+    "sst": 27.6,
+    "sss": 36.4,
+    "wind_speed": 18.2,
+    "wave_height": 3.1,
+    "current_speed": 0.55
+  },
+  {
+    "id": "AD07",
+    "name": "OMNI Buoy AD07 (Arabian Sea)",
+    "lat": 15.0,
+    "lon": 69.0,
+    "sst": 27.2,
+    "sss": 36.6,
+    "wind_speed": 21.0,
+    "wave_height": 3.4,
+    "current_speed": 0.62
+  },
+  {
+    "id": "AD08",
+    "name": "OMNI Buoy AD08 (Arabian Sea)",
+    "lat": 12.0,
+    "lon": 68.5,
+    "sst": 26.8,
+    "sss": 36.2,
+    "wind_speed": 19.5,
+    "wave_height": 3.0,
+    "current_speed": 0.58
+  },
+  {
+    "id": "AD09",
+    "name": "OMNI Buoy AD09 (Arabian Sea)",
+    "lat": 8.3,
+    "lon": 73.3,
+    "sst": 26.4,
+    "sss": 35.8,
+    "wind_speed": 17.0,
+    "wave_height": 2.8,
+    "current_speed": 0.5
+  }
+]

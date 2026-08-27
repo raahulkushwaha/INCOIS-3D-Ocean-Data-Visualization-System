@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>INCOIS 3D Ocean Data Visualization System</title>
+  <meta name="description" content="Operational 3D Oceanographic Data & Observation Integration Platform for INCOIS - Exploring ocean models, Argo floats, gliders, and current streamlines.">
+  
+  <!-- CSS Stylesheets -->
+  <link rel="stylesheet" href="/static/css/main.css">
+  <link rel="stylesheet" href="/static/css/components.css">
+
+  <!-- Three.js and OrbitControls from trusted CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+</head>
+<body>
+  <div id="app-container">
+    
+    <!-- Top Navigation Bar -->
+    <header class="top-navbar">
+      <div class="brand-section">
+        <div class="brand-logo">IO</div>
+        <div class="brand-titles">
+          <h1>INCOIS 3D Ocean Explorer</h1>
+          <div class="subtitle">Indian National Centre for Ocean Information Services</div>
+        </div>
+      </div>
+
+      <!-- Quick Outreach Tours & Mode Selector -->
+      <div class="nav-center">
+        <button class="bookmark-chip outreach-btn" data-tour="thermocline_dive" id="btn-tour-thermocline">
+          🌊 Dive Through Layers
+        </button>
+        <button class="bookmark-chip outreach-btn" data-tour="argo_profiling_cycle" id="btn-tour-argo">
+          🛰️ Argo Float Journey
+        </button>
+        <button class="bookmark-chip outreach-btn" data-tour="monsoon_somali_current" id="btn-tour-monsoon">
+          🌀 Monsoon Somali Current
+        </button>
+        <button class="bookmark-chip outreach-btn" data-tour="bay_of_bengal_freshwater" id="btn-tour-bob">
+          💧 Bay of Bengal Barrier Layer
+        </button>
+      </div>
+
+      <!-- Right Action Tools -->
+      <div class="nav-right">
+        <button class="btn-secondary" id="btn-open-upload">
+          ⬆ Ingest NetCDF / CSV
+        </button>
+        <button class="btn-primary" id="btn-export-screenshot">
+          📷 Capture 3D View
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Workspace -->
+    <main class="main-workspace">
+      
+      <!-- 3D WebGL Canvas Viewport -->
+      <div id="viewport-3d"></div>
+
+      <!-- HUD Floating Layers -->
+      <div class="hud-layer">
+        
+        <!-- Live Coordinates & Telemetry Tracker -->
+        <div class="hud-telemetry" id="hud-telemetry-box">
+          <div class="telemetry-item">
+            <span class="telemetry-label">Lat:</span>
+            <span class="telemetry-val" id="telemetry-lat">14.80° N</span>
+          </div>
+          <div class="telemetry-item">
+            <span class="telemetry-label">Lon:</span>
+            <span class="telemetry-val" id="telemetry-lon">69.20° E</span>
+          </div>
+          <div class="telemetry-item">
+            <span class="telemetry-label">Depth:</span>
+            <span class="telemetry-val" id="telemetry-depth">0 m</span>
+          </div>
+        </div>
+
+        <!-- Quick Camera Bookmarks -->
+        <div class="hud-bookmarks">
+          <button class="bookmark-chip active" data-bookmark="indian_ocean_overview" id="bm-overview">Whole Indian Ocean</button>
+          <button class="bookmark-chip" data-bookmark="arabian_sea" id="bm-as">Arabian Sea</button>
+          <button class="bookmark-chip" data-bookmark="bay_of_bengal" id="bm-bob">Bay of Bengal</button>
+          <button class="bookmark-chip" data-bookmark="somali_jet" id="bm-somali">Somali Jet</button>
+          <button class="bookmark-chip" data-bookmark="equatorial_jet" id="bm-eq">Equatorial Jet</button>
+        </div>
+      </div>
+
+      <!-- Left Control Drawer -->
+      <aside class="left-control-drawer" id="left-control-panel">
+        
+        <!-- 1. Variable Selector -->
+        <section class="panel-section">
+          <div class="section-header">
+            <h2 class="section-title"><span>📊</span> Ocean Variables</h2>
+          </div>
+          <div class="var-grid">
+            <div class="var-pill active" data-var="temperature" id="var-temp">
+              <span class="var-name">Temperature</span>
+              <span class="var-unit">°C (Potential Temp)</span>
+            </div>
+            <div class="var-pill" data-var="salinity" id="var-salt">
+              <span class="var-name">Salinity</span>
+              <span class="var-unit">PSU (Practical)</span>
+            </div>
+            <div class="var-pill" data-var="current_speed" id="var-current">
+              <span class="var-name">Current Speed</span>
+              <span class="var-unit">m/s (Magnitude)</span>
+            </div>
+            <div class="var-pill" data-var="chlorophyll" id="var-chla">
+              <span class="var-name">Chlorophyll-a</span>
+              <span class="var-unit">mg/m³ (Plankton)</span>
+            </div>
+            <div class="var-pill" data-var="u_velocity" id="var-u">
+              <span class="var-name">Eastward (U)</span>
+              <span class="var-unit">m/s (Zonal Velocity)</span>
+            </div>
+            <div class="var-pill" data-var="v_velocity" id="var-v">
+              <span class="var-name">Northward (V)</span>
+              <span class="var-unit">m/s (Meridional)</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- 2. Depth Navigation -->
+        <section class="panel-section">
+          <div class="section-header">
+            <h2 class="section-title"><span>⚓</span> Depth Level</h2>
+          </div>
+          <div class="depth-control-wrap">
+            <div class="depth-readout">
+              <span style="color: var(--text-muted); font-size: 11px;">Current Depth</span>
+              <span class="depth-val-display" id="depth-val-display">0 m</span>
+            </div>
+
+            <!-- Discrete Depth Presets -->
+            <div class="depth-preset-bar">
+              <button class="depth-btn active" data-depth="0" id="depth-0">0m</button>
+              <button class="depth-btn" data-depth="10" id="depth-10">10m</button>
+              <button class="depth-btn" data-depth="50" id="depth-50">50m</button>
+              <button class="depth-btn" data-depth="100" id="depth-100">100m</button>
+              <button class="depth-btn" data-depth="200" id="depth-200">200m</button>
+              <button class="depth-btn" data-depth="500" id="depth-500">500m</button>
+              <button class="depth-btn" data-depth="1000" id="depth-1000">1000m</button>
+              <button class="depth-btn" data-depth="2000" id="depth-2000">2000m</button>
+            </div>
+
+            <!-- Continuous Range Slider -->
+            <div class="slider-container">
+              <input type="range" class="custom-range" id="depth-slider" min="0" max="2000" step="5" value="0">
+            </div>
+          </div>
+        </section>
+
+        <!-- 3. Scientific Colorbar & Scale Settings -->
+        <section class="panel-section">
+          <div class="section-header colorbar-header">
+            <h2 class="section-title"><span>🎨</span> Scientific Palette</h2>
+            <select class="palette-select" id="palette-selector">
+              <option value="turbo">Turbo (Spectral)</option>
+              <option value="viridis">Viridis (Standard)</option>
+              <option value="plasma">Plasma (Thermal)</option>
+              <option value="inferno">Inferno</option>
+              <option value="haline">Haline (Salinity)</option>
+              <option value="thermal">Thermal</option>
+              <option value="coolwarm">Cool-Warm (Divergent)</option>
+              <option value="jet">Jet (Classic)</option>
+            </select>
+          </div>
+
+          <div class="colorbar-panel">
+            <canvas id="colorbar-canvas" class="colorbar-gradient-canvas" width="280" height="18"></canvas>
+            <div class="colorbar-ticks">
+              <span id="colorbar-min">2.8 °C</span>
+              <span id="colorbar-mid">16.5 °C</span>
+              <span id="colorbar-max">30.5 °C</span>
+            </div>
+
+            <!-- Clamp Min/Max Inputs -->
+            <div class="colorbar-clamp-inputs">
+              <input type="number" class="clamp-input" id="clamp-min-input" placeholder="Min" step="0.5">
+              <span style="color:var(--text-muted)">to</span>
+              <input type="number" class="clamp-input" id="clamp-max-input" placeholder="Max" step="0.5">
+            </div>
+          </div>
+        </section>
+
+        <!-- 4. Layer Management -->
+        <section class="panel-section">
+          <div class="section-header">
+            <h2 class="section-title"><span>🗂️</span> Visualization Layers</h2>
+          </div>
+          <div class="layer-list">
+            <!-- Model 3D Field -->
+            <div class="layer-item">
+              <div class="layer-item-top">
+                <label class="layer-label" for="layer-model-toggle">
+                  <input type="checkbox" class="layer-checkbox" id="layer-model-toggle" checked>
+                  <span>Model Depth Slice (ROMS)</span>
+                </label>
+              </div>
+              <div class="layer-opacity-wrap">
+                <span>Opacity</span>
+                <input type="range" class="custom-range" id="layer-model-opacity" min="0.1" max="1" step="0.05" value="0.88">
+              </div>
+            </div>
+
+            <!-- Current Flow Particles -->
+            <div class="layer-item">
+              <div class="layer-item-top">
+                <label class="layer-label" for="layer-flow-toggle">
+                  <input type="checkbox" class="layer-checkbox" id="layer-flow-toggle" checked>
+                  <span>Current Flow Streamlines</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Argo Floats -->
+            <div class="layer-item">
+              <div class="layer-item-top">
+                <label class="layer-label" for="layer-argo-toggle">
+                  <input type="checkbox" class="layer-checkbox" id="layer-argo-toggle" checked>
+                  <span style="color:var(--cyan-bright)">● Argo Profilers (In-situ)</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Gliders -->
+            <div class="layer-item">
+              <div class="layer-item-top">
+                <label class="layer-label" for="layer-glider-toggle">
+                  <input type="checkbox" class="layer-checkbox" id="layer-glider-toggle" checked>
+                  <span style="color:#ff4757">▲ Underwater Glider Tracks</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Moored Buoys -->
+            <div class="layer-item">
+              <div class="layer-item-top">
+                <label class="layer-label" for="layer-buoy-toggle">
+                  <input type="checkbox" class="layer-checkbox" id="layer-buoy-toggle" checked>
+                  <span style="color:var(--amber-warn)">◆ Moored OMNI Buoys</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- 3D Vertical Transect Curtain -->
+            <div class="layer-item">
+              <div class="layer-item-top">
+                <label class="layer-label" for="layer-transect-toggle">
+                  <input type="checkbox" class="layer-checkbox" id="layer-transect-toggle">
+                  <span>3D Vertical Curtain (15°N)</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- 3D Isosurface -->
+            <div class="layer-item">
+              <div class="layer-item-top">
+                <label class="layer-label" for="layer-isosurface-toggle">
+                  <input type="checkbox" class="layer-checkbox" id="layer-isosurface-toggle">
+                  <span>3D Thermocline Isosurface (28°C)</span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 5. 3D View Settings -->
+        <section class="panel-section">
+          <div class="section-header">
+            <h2 class="section-title"><span>📐</span> Vertical Exaggeration</h2>
+          </div>
+          <div class="slider-container">
+            <input type="range" class="custom-range" id="vertical-exag-slider" min="1" max="30" step="1" value="5">
+            <div style="display:flex; justify-content:space-between; font-size:10px; color:var(--text-muted);">
+              <span>1x (True Scale)</span>
+              <span>15x</span>
+              <span>30x (Exaggerated)</span>
+            </div>
+          </div>
+        </section>
+
+      </aside>
+
+      <!-- Right Analytics & Observation Drawer -->
+      <aside class="right-analytics-drawer" id="right-analytics-panel">
+        
+        <!-- 1. Observation Platform Card -->
+        <section class="panel-section">
+          <div class="section-header">
+            <h2 class="section-title"><span>🛰️</span> Observation Telemetry</h2>
+          </div>
+          <div id="obs-detail-card" class="observation-card">
+            <!-- Populated dynamically by app.js -->
+          </div>
+        </section>
+
+        <!-- 2. Model vs Observation Profile & Difference Chart -->
+        <section class="panel-section">
+          <div class="chart-container-box">
+            <div class="chart-header">
+              <h2 class="section-title" style="margin-bottom:0;"><span>📈</span> Vertical Profile</h2>
+              <div class="chart-legend">
+                <div class="legend-item">
+                  <span class="legend-color" style="background:#00f2ff;"></span>
+                  <span>Model</span>
+                </div>
+                <div class="legend-item">
+                  <span class="legend-color" style="background:#00e599;"></span>
+                  <span>Argo</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Profile Canvas -->
+            <div class="chart-canvas-wrap">
+              <canvas id="profile-chart-canvas"></canvas>
+            </div>
+
+            <!-- Export Profile Chart Buttons -->
+            <div style="display:flex; justify-content:flex-end; gap:6px; margin-top:4px;">
+              <button class="btn-secondary" style="font-size:10px; padding:4px 8px;" id="btn-export-chart-csv">
+                Download CSV
+              </button>
+              <button class="btn-secondary" style="font-size:10px; padding:4px 8px;" id="btn-export-chart-png">
+                Save PNG
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- 3. Active Datasets Registry -->
+        <section class="panel-section">
+          <div class="section-header">
+            <h2 class="section-title"><span>📂</span> Ingested Sources</h2>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:6px; font-size:11px;">
+            <div style="background:var(--bg-abyss); padding:8px 10px; border-radius:6px; border:1px solid var(--border-glass);">
+              <div style="color:#fff; font-weight:600;">INCOIS ROMS Ocean Model</div>
+              <div style="color:var(--text-muted); font-size:10px;">NetCDF-4 CF-1.8 • 0.5° Grid • 14 Levels</div>
+            </div>
+            <div style="background:var(--bg-abyss); padding:8px 10px; border-radius:6px; border:1px solid var(--border-glass);">
+              <div style="color:#fff; font-weight:600;">Indian Ocean Argo Array</div>
+              <div style="color:var(--text-muted); font-size:10px;">8 Active In-Situ Profilers • Near Real-Time</div>
+            </div>
+            <div style="background:var(--bg-abyss); padding:8px 10px; border-radius:6px; border:1px solid var(--border-glass);">
+              <div style="color:#fff; font-weight:600;">Ocean Glider SG-601 & SG-504</div>
+              <div style="color:var(--text-muted); font-size:10px;">Autonomous 1000m Saw-tooth CTD Surveys</div>
+            </div>
+          </div>
+        </section>
+
+      </aside>
+
+      <!-- Bottom Timeline Animation Scrubber -->
+      <footer class="bottom-timeline-bar">
+        <!-- Playback controls -->
+        <div class="timeline-controls-left">
+          <button class="btn-play-pause" id="btn-play-pause" title="Play / Pause Time Animation">▶</button>
+          <button class="btn-step" id="btn-step-prev" title="Previous Time Step">⏮</button>
+          <button class="btn-step" id="btn-step-next" title="Next Time Step">⏭</button>
+        </div>
+
+        <!-- Timeline Scrubber -->
+        <div class="timeline-center-scrubber">
+          <div class="timeline-time-label">
+            <span style="color:var(--text-muted)">Forecast Cycle:</span>
+            <span class="timeline-timestamp" id="timeline-timestamp-val">2026-08-27 00:00:00 UTC</span>
+          </div>
+          <input type="range" class="custom-range" id="timeline-slider" min="0" max="4" step="1" value="0">
+        </div>
+
+        <!-- Playback Speed -->
+        <div class="timeline-right-speed">
+          <span style="font-size:11px; color:var(--text-muted);">Speed:</span>
+          <button class="speed-chip active" data-speed="1">1x</button>
+          <button class="speed-chip" data-speed="2">2x</button>
+          <button class="speed-chip" data-speed="5">5x</button>
+        </div>
+      </footer>
+
+    </main>
+
+    <!-- Outreach Guided Story Mode Modal -->
+    <div class="modal-backdrop" id="outreach-modal">
+      <div class="modal-dialog">
+        <div class="modal-header">
+          <div class="modal-title">
+            <span>🌊</span> INCOIS Ocean Science Story
+          </div>
+          <button class="modal-close-btn" id="outreach-modal-close">✕</button>
+        </div>
+        <div class="modal-body" id="outreach-modal-content">
+          <!-- Populated by outreach.js -->
+        </div>
+        <div class="modal-footer">
+          <button class="btn-secondary" id="outreach-prev-btn">← Previous</button>
+          <button class="btn-primary" id="outreach-next-btn">Next Step →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Upload NetCDF/CSV Modal -->
+    <div class="modal-backdrop" id="upload-modal">
+      <div class="modal-dialog" style="max-width: 500px;">
+        <div class="modal-header">
+          <div class="modal-title">
+            <span>⬆</span> Ingest Oceanographic Dataset
+          </div>
+          <button class="modal-close-btn" id="upload-modal-close">✕</button>
+        </div>
+        <form id="upload-form">
+          <div class="modal-body">
+            <p style="color:var(--text-secondary); font-size:12px; line-height:1.5;">
+              Upload a CF-compliant <strong>NetCDF (.nc)</strong> model output or an in-situ observation <strong>CSV (.csv)</strong> cast profile.
+            </p>
+            <div style="border: 2px dashed var(--border-subtle); padding: 24px; text-align: center; border-radius: 8px; background: var(--bg-abyss);">
+              <input type="file" id="upload-file-input" accept=".nc,.nc4,.csv,.txt" required style="color:var(--text-primary);">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn-primary">Ingest Dataset</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Application Scripts in Logical Order -->
+  <script src="/static/js/colormaps.js"></script>
+  <script src="/static/js/api.js"></script>
+  <script src="/static/js/scene.js"></script>
+  <script src="/static/js/volume_renderer.js"></script>
+  <script src="/static/js/flow_field.js"></script>
+  <script src="/static/js/observations.js"></script>
+  <script src="/static/js/transect_renderer.js"></script>
+  <script src="/static/js/charts.js"></script>
+  <script src="/static/js/outreach.js"></script>
+  <script src="/static/js/app.js"></script>
+</body>
+</html>

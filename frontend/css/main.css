@@ -1,0 +1,371 @@
+/* ==========================================================================
+   INCOIS 3D Ocean Data Visualization System - Main Design System
+   Cyber-Oceanic Glassmorphic Dark Aesthetic
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Outfit:wght@400;500;600;700;800&display=swap');
+
+:root {
+  /* Core Oceanographic Palette */
+  --bg-space: #030712;
+  --bg-abyss: #060d1b;
+  --bg-deep: #0a1628;
+  --bg-surface: rgba(13, 27, 49, 0.75);
+  --bg-panel: rgba(11, 23, 42, 0.85);
+  --bg-glass: rgba(16, 32, 59, 0.65);
+  --bg-glass-hover: rgba(26, 48, 86, 0.75);
+  
+  /* Primary Accent Tones */
+  --cyan-bright: #00f2ff;
+  --cyan-glow: rgba(0, 242, 255, 0.35);
+  --cyan-dim: #0099b8;
+  --teal-ocean: #00d2be;
+  --blue-marine: #0077b6;
+  --emerald-bio: #00e599;
+  --emerald-glow: rgba(0, 229, 153, 0.3);
+  --amber-warn: #ffb800;
+  --amber-glow: rgba(255, 184, 0, 0.3);
+  --coral-hot: #ff4757;
+  
+  /* Borders & Glassmorphism */
+  --border-subtle: rgba(0, 242, 255, 0.15);
+  --border-glow: rgba(0, 242, 255, 0.4);
+  --border-glass: rgba(255, 255, 255, 0.08);
+  --blur-strong: blur(16px);
+  --blur-soft: blur(8px);
+  
+  /* Typography */
+  --font-main: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-display: 'Outfit', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  
+  --text-primary: #f0f6fc;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --text-cyan: #38bdf8;
+  
+  /* Shadows & Elevations */
+  --shadow-lg: 0 10px 30px -5px rgba(0, 0, 0, 0.6), 0 0 20px rgba(0, 242, 255, 0.1);
+  --shadow-hud: 0 4px 20px rgba(0, 0, 0, 0.5), inset 0 0 15px rgba(0, 242, 255, 0.05);
+  --glow-cyan: 0 0 15px rgba(0, 242, 255, 0.4);
+  
+  /* Layout Dimensions */
+  --header-height: 56px;
+  --left-panel-width: 320px;
+  --right-panel-width: 380px;
+  --bottom-bar-height: 72px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+body, html {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: var(--bg-space);
+  color: var(--text-primary);
+  font-family: var(--font-main);
+  font-size: 13px;
+  user-select: none;
+}
+
+/* Base Scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(6, 13, 27, 0.5);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--cyan-dim);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--cyan-bright);
+}
+
+/* App Container */
+#app-container {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Top Navigation Bar */
+.top-navbar {
+  height: var(--header-height);
+  background: var(--bg-panel);
+  backdrop-filter: var(--blur-strong);
+  border-bottom: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 18px;
+  z-index: 100;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+}
+
+.brand-section {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.brand-logo {
+  width: 34px;
+  height: 34px;
+  background: linear-gradient(135deg, var(--cyan-bright), var(--blue-marine));
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: 800;
+  font-family: var(--font-display);
+  font-size: 16px;
+  box-shadow: var(--glow-cyan);
+}
+
+.brand-titles h1 {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  background: linear-gradient(90deg, #ffffff, var(--cyan-bright));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.brand-titles .subtitle {
+  font-size: 10.5px;
+  color: var(--text-secondary);
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+}
+
+.nav-center {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Main Workspace */
+.main-workspace {
+  flex: 1;
+  display: flex;
+  position: relative;
+  overflow: hidden;
+}
+
+/* 3D WebGL Viewport */
+#viewport-3d {
+  flex: 1;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  background: radial-gradient(circle at 50% 50%, #0c1829 0%, #030712 100%);
+}
+
+#viewport-3d canvas {
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+}
+
+/* HUD Overlay Elements */
+.hud-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.hud-layer > * {
+  pointer-events: auto;
+}
+
+/* Coordinates & Telemetry Floating Widget */
+.hud-telemetry {
+  position: absolute;
+  top: 14px;
+  left: calc(var(--left-panel-width) + 20px);
+  background: var(--bg-surface);
+  backdrop-filter: var(--blur-strong);
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  padding: 8px 14px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-cyan);
+  box-shadow: var(--shadow-hud);
+  transition: all 0.2s ease;
+}
+
+.telemetry-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.telemetry-label {
+  color: var(--text-muted);
+  text-transform: uppercase;
+  font-size: 9.5px;
+}
+
+.telemetry-val {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+/* Quick Camera Bookmarks */
+.hud-bookmarks {
+  position: absolute;
+  top: 14px;
+  right: calc(var(--right-panel-width) + 20px);
+  display: flex;
+  gap: 6px;
+}
+
+.bookmark-chip {
+  background: var(--bg-surface);
+  backdrop-filter: var(--blur-strong);
+  border: 1px solid var(--border-glass);
+  color: var(--text-secondary);
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.bookmark-chip:hover {
+  background: var(--bg-glass-hover);
+  border-color: var(--cyan-bright);
+  color: #fff;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px var(--cyan-glow);
+}
+
+.bookmark-chip.active {
+  background: rgba(0, 242, 255, 0.15);
+  border-color: var(--cyan-bright);
+  color: var(--cyan-bright);
+  box-shadow: 0 0 10px var(--cyan-glow);
+}
+
+/* Floating 3D Controls (Compass, Reset, Vertical Exaggeration) */
+.hud-3d-tools {
+  position: absolute;
+  bottom: calc(var(--bottom-bar-height) + 16px);
+  left: calc(var(--left-panel-width) + 20px);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.tool-fab {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: var(--bg-surface);
+  backdrop-filter: var(--blur-strong);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: var(--shadow-hud);
+  transition: all 0.2s ease;
+}
+
+.tool-fab:hover {
+  background: var(--cyan-bright);
+  color: var(--bg-space);
+  box-shadow: var(--glow-cyan);
+}
+
+/* Left Sidebar Controls */
+.left-control-drawer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--left-panel-width);
+  height: calc(100% - var(--bottom-bar-height));
+  background: var(--bg-panel);
+  backdrop-filter: var(--blur-strong);
+  border-right: 1px solid var(--border-subtle);
+  display: flex;
+  flex-direction: column;
+  z-index: 20;
+  overflow-y: auto;
+  box-shadow: var(--shadow-lg);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Right Analytics & Observation Drawer */
+.right-analytics-drawer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: var(--right-panel-width);
+  height: calc(100% - var(--bottom-bar-height));
+  background: var(--bg-panel);
+  backdrop-filter: var(--blur-strong);
+  border-left: 1px solid var(--border-subtle);
+  display: flex;
+  flex-direction: column;
+  z-index: 20;
+  overflow-y: auto;
+  box-shadow: var(--shadow-lg);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Bottom Timeline & Animation Scrubber */
+.bottom-timeline-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: var(--bottom-bar-height);
+  background: var(--bg-panel);
+  backdrop-filter: var(--blur-strong);
+  border-top: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  z-index: 30;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.5);
+}

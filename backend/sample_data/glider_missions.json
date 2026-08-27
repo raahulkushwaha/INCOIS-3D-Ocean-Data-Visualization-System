@@ -1,0 +1,570 @@
+[
+  {
+    "id": "SG-601",
+    "name": "INCOIS Ocean Glider SG-601",
+    "mission": "Bay of Bengal Monsoon Barrier Layer Transect",
+    "speed_knots": 0.55,
+    "battery_percent": 82,
+    "status": "Active Diving",
+    "start_time": "2026-08-20T00:00:00Z",
+    "end_time": "2026-09-10T00:00:00Z",
+    "sensors": [
+      "Seabird CTD SBE-41",
+      "WetLabs ECO Chlorophyll/Turbidity",
+      "Aanderaa Oxygen Optode"
+    ],
+    "waypoints": [
+      {
+        "lat": 12.0,
+        "lon": 82.0,
+        "name": "Station Alpha"
+      },
+      {
+        "lat": 14.5,
+        "lon": 85.0,
+        "name": "Station Bravo"
+      },
+      {
+        "lat": 17.0,
+        "lon": 88.5,
+        "name": "Station Charlie (Freshwater Tongue)"
+      }
+    ],
+    "dive_profile": [
+      {
+        "dive_id": "DIVE-001",
+        "latitude": 12.0,
+        "longitude": 82.0,
+        "depth_m": 50.0,
+        "temperature": 20.23,
+        "salinity": 34.51,
+        "chlorophyll": 1.402,
+        "timestamp": "2026-08-22T20:00:00"
+      },
+      {
+        "dive_id": "DIVE-002",
+        "latitude": 12.2083,
+        "longitude": 82.2708,
+        "depth_m": 686.4,
+        "temperature": 2.8,
+        "salinity": 32.87,
+        "chlorophyll": 0.02,
+        "timestamp": "2026-08-23T00:00:00"
+      },
+      {
+        "dive_id": "DIVE-003",
+        "latitude": 12.4167,
+        "longitude": 82.5417,
+        "depth_m": 950.0,
+        "temperature": 2.8,
+        "salinity": 32.82,
+        "chlorophyll": 0.02,
+        "timestamp": "2026-08-23T04:00:00"
+      },
+      {
+        "dive_id": "DIVE-004",
+        "latitude": 12.625,
+        "longitude": 82.8125,
+        "depth_m": 686.4,
+        "temperature": 2.8,
+        "salinity": 32.87,
+        "chlorophyll": 0.02,
+        "timestamp": "2026-08-23T08:00:00"
+      },
+      {
+        "dive_id": "DIVE-005",
+        "latitude": 12.8333,
+        "longitude": 83.0833,
+        "depth_m": 50.0,
+        "temperature": 20.23,
+        "salinity": 34.51,
+        "chlorophyll": 1.402,
+        "timestamp": "2026-08-23T12:00:00"
+      },
+      {
+        "dive_id": "DIVE-006",
+        "latitude": 13.0417,
+        "longitude": 83.3542,
+        "depth_m": 686.4,
+        "temperature": 2.8,
+        "salinity": 32.87,
+        "chlorophyll": 0.02,
+        "timestamp": "2026-08-23T16:00:00"
+      },
+      {
+        "dive_id": "DIVE-007",
+        "latitude": 13.25,
+        "longitude": 83.625,
+        "depth_m": 950.0,
+        "temperature": 2.8,
+        "salinity": 32.82,
+        "chlorophyll": 0.02,
+        "timestamp": "2026-08-23T20:00:00"
+      },
+      {
+        "dive_id": "DIVE-008",
+        "latitude": 13.4583,
+        "longitude": 83.8958,
+        "depth_m": 686.4,
+        "temperature": 2.8,
+        "salinity": 32.87,
+        "chlorophyll": 0.02,
+        "timestamp": "2026-08-24T00:00:00"
+      },
+      {
+        "dive_id": "DIVE-009",
+        "latitude": 13.6667,
+        "longitude": 84.1667,
+        "depth_m": 50.0,
+        "temperature": 20.23,
+        "salinity": 34.51,
+        "chlorophyll": 1.402,
+        "timestamp": "2026-08-24T04:00:00"
+      },
+      {
+        "dive_id": "DIVE-010",
+        "latitude": 13.875,
+        "longitude": 84.4375,
+        "depth_m": 686.4,
+        "temperature": 2.8,
+        "salinity": 32.87,
+        "chlorophyll": 0.02,
+        "timestamp": "2026-08-24T08:00:00"
+      },
+      {
+        "dive_id": "DIVE-011",
+        "latitude": 14.0833,
+        "longitude": 84.7083,
+        "depth_m": 950.0,
+        "temperature": 2.8,
+        "salinity": 32.82,
+        "chlorophyll": 0.02,
+        "timestamp": "2026-08-24T12:00:00"
+      },
+      {
+        "dive_id": "DIVE-012",
+        "latitude": 14.2917,
+        "longitude": 84.9792,
+        "depth_m": 686.4,
+        "temperature": 2.8,
+        "salinity": 32.87,
+        "chlorophyll": 0.02,
+        "timestamp": "2026-08-24T16:00:00"
+      },
+      {
+        "dive_id": "DIVE-013",
+        "latitude": 14.5,
+        "longitude": 85.25,
+        "depth_m": 50.0,
+        "temperature": 20.23,
+        "salinity": 34.51,
+        "chlorophyll": 1.402,
+        "timestamp": "2026-08-24T20:00:00"
+      },
+      {
+        "dive_id": "DIVE-014",
+        "latitude": 14.7083,
+        "longitude": 85.5208,
+        "depth_m": 686.4,
+        "temperature": 2.8,
+        "salinity": 32.87,
+        "chlorophyll": 0.02,
+        "timestamp": "2026-08-25T00:00:00"
+      },
+      {
+        "dive_id": "DIVE-015",
+        "latitude": 14.9167,
+        "longitude": 85.7917,
+        "depth_m": 950.0,
+        "temperature": 2.8,
+        "salinity": 32.82,
+        "chlorophyll": 0.02,
+        "timestamp": "2026-08-25T04:00:00"
+      },
+      {
+        "dive_id": "DIVE-016",
+        "latitude": 15.125,
+        "longitude": 86.0625,
+        "depth_m": 686.4,
+        "temperature": 2.8,
+        "salinity": 32.87,
+        "chlorophyll": 0.02,
+        "timestamp": "2026-08-25T08:00:00"
+      },
+      {
+        "dive_id": "DIVE-017",
+        "latitude": 15.3333,
+        "longitude": 86.3333,
+        "depth_m": 50.0,
+        "temperature": 20.23,
+        "salinity": 34.51,
+        "chlorophyll": 1.402,
+        "timestamp": "2026-08-25T12:00:00"
+      },
+      {
+        "dive_id": "DIVE-018",
+        "latitude": 15.5417,
+        "longitude": 86.6042,
+        "depth_m": 686.4,
+        "temperature": 2.8,
+        "salinity": 32.87,
+        "chlorophyll": 0.02,
+        "timestamp": "2026-08-25T16:00:00"
+      },
+      {
+        "dive_id": "DIVE-019",
+        "latitude": 15.75,
+        "longitude": 86.875,
+        "depth_m": 950.0,
+        "temperature": 2.8,
+        "salinity": 32.82,
+        "chlorophyll": 0.02,
+        "timestamp": "2026-08-25T20:00:00"
+      },
+      {
+        "dive_id": "DIVE-020",
+        "latitude": 15.9583,
+        "longitude": 87.1458,
+        "depth_m": 686.4,
+        "temperature": 2.8,
+        "salinity": 32.87,
+        "chlorophyll": 0.02,
+        "timestamp": "2026-08-26T00:00:00"
+      },
+      {
+        "dive_id": "DIVE-021",
+        "latitude": 16.1667,
+        "longitude": 87.4167,
+        "depth_m": 50.0,
+        "temperature": 20.23,
+        "salinity": 34.51,
+        "chlorophyll": 1.402,
+        "timestamp": "2026-08-26T04:00:00"
+      },
+      {
+        "dive_id": "DIVE-022",
+        "latitude": 16.375,
+        "longitude": 87.6875,
+        "depth_m": 686.4,
+        "temperature": 2.8,
+        "salinity": 32.87,
+        "chlorophyll": 0.02,
+        "timestamp": "2026-08-26T08:00:00"
+      },
+      {
+        "dive_id": "DIVE-023",
+        "latitude": 16.5833,
+        "longitude": 87.9583,
+        "depth_m": 950.0,
+        "temperature": 2.8,
+        "salinity": 32.82,
+        "chlorophyll": 0.02,
+        "timestamp": "2026-08-26T12:00:00"
+      },
+      {
+        "dive_id": "DIVE-024",
+        "latitude": 16.7917,
+        "longitude": 88.2292,
+        "depth_m": 686.4,
+        "temperature": 2.8,
+        "salinity": 32.87,
+        "chlorophyll": 0.02,
+        "timestamp": "2026-08-26T16:00:00"
+      },
+      {
+        "dive_id": "DIVE-025",
+        "latitude": 17.0,
+        "longitude": 88.5,
+        "depth_m": 50.0,
+        "temperature": 20.23,
+        "salinity": 34.51,
+        "chlorophyll": 1.402,
+        "timestamp": "2026-08-26T20:00:00"
+      }
+    ]
+  },
+  {
+    "id": "SG-504",
+    "name": "INCOIS Ocean Glider SG-504",
+    "mission": "Arabian Sea Oxygen Minimum Zone Survey",
+    "speed_knots": 0.6,
+    "battery_percent": 71,
+    "status": "Active Diving",
+    "start_time": "2026-08-18T00:00:00Z",
+    "end_time": "2026-09-05T00:00:00Z",
+    "sensors": [
+      "Seabird CTD SBE-41",
+      "Oxygen Optode 4330F",
+      "PAR Photosynthetically Active Radiation"
+    ],
+    "waypoints": [
+      {
+        "lat": 15.0,
+        "lon": 68.0,
+        "name": "OMZ Station 1"
+      },
+      {
+        "lat": 17.5,
+        "lon": 66.0,
+        "name": "OMZ Station 2"
+      },
+      {
+        "lat": 19.5,
+        "lon": 64.0,
+        "name": "OMZ Station 3"
+      }
+    ],
+    "dive_profile": [
+      {
+        "dive_id": "DIVE-001",
+        "latitude": 15.0,
+        "longitude": 68.0,
+        "depth_m": 50.0,
+        "temperature": 20.23,
+        "salinity": 35.18,
+        "chlorophyll": 1.402,
+        "timestamp": "2026-08-22T20:00:00"
+      },
+      {
+        "dive_id": "DIVE-002",
+        "latitude": 15.1875,
+        "longitude": 67.8333,
+        "depth_m": 686.4,
+        "temperature": 2.8,
+        "salinity": 36.08,
+        "chlorophyll": 0.02,
+        "timestamp": "2026-08-23T00:00:00"
+      },
+      {
+        "dive_id": "DIVE-003",
+        "latitude": 15.375,
+        "longitude": 67.6667,
+        "depth_m": 950.0,
+        "temperature": 2.8,
+        "salinity": 36.15,
+        "chlorophyll": 0.02,
+        "timestamp": "2026-08-23T04:00:00"
+      },
+      {
+        "dive_id": "DIVE-004",
+        "latitude": 15.5625,
+        "longitude": 67.5,
+        "depth_m": 686.4,
+        "temperature": 2.8,
+        "salinity": 36.08,
+        "chlorophyll": 0.02,
+        "timestamp": "2026-08-23T08:00:00"
+      },
+      {
+        "dive_id": "DIVE-005",
+        "latitude": 15.75,
+        "longitude": 67.3333,
+        "depth_m": 50.0,
+        "temperature": 20.23,
+        "salinity": 35.18,
+        "chlorophyll": 1.402,
+        "timestamp": "2026-08-23T12:00:00"
+      },
+      {
+        "dive_id": "DIVE-006",
+        "latitude": 15.9375,
+        "longitude": 67.1667,
+        "depth_m": 686.4,
+        "temperature": 2.8,
+        "salinity": 36.08,
+        "chlorophyll": 0.02,
+        "timestamp": "2026-08-23T16:00:00"
+      },
+      {
+        "dive_id": "DIVE-007",
+        "latitude": 16.125,
+        "longitude": 67.0,
+        "depth_m": 950.0,
+        "temperature": 2.8,
+        "salinity": 36.15,
+        "chlorophyll": 0.02,
+        "timestamp": "2026-08-23T20:00:00"
+      },
+      {
+        "dive_id": "DIVE-008",
+        "latitude": 16.3125,
+        "longitude": 66.8333,
+        "depth_m": 686.4,
+        "temperature": 2.8,
+        "salinity": 36.08,
+        "chlorophyll": 0.02,
+        "timestamp": "2026-08-24T00:00:00"
+      },
+      {
+        "dive_id": "DIVE-009",
+        "latitude": 16.5,
+        "longitude": 66.6667,
+        "depth_m": 50.0,
+        "temperature": 20.23,
+        "salinity": 35.18,
+        "chlorophyll": 1.402,
+        "timestamp": "2026-08-24T04:00:00"
+      },
+      {
+        "dive_id": "DIVE-010",
+        "latitude": 16.6875,
+        "longitude": 66.5,
+        "depth_m": 686.4,
+        "temperature": 2.8,
+        "salinity": 36.08,
+        "chlorophyll": 0.02,
+        "timestamp": "2026-08-24T08:00:00"
+      },
+      {
+        "dive_id": "DIVE-011",
+        "latitude": 16.875,
+        "longitude": 66.3333,
+        "depth_m": 950.0,
+        "temperature": 2.8,
+        "salinity": 36.15,
+        "chlorophyll": 0.02,
+        "timestamp": "2026-08-24T12:00:00"
+      },
+      {
+        "dive_id": "DIVE-012",
+        "latitude": 17.0625,
+        "longitude": 66.1667,
+        "depth_m": 686.4,
+        "temperature": 2.8,
+        "salinity": 36.08,
+        "chlorophyll": 0.02,
+        "timestamp": "2026-08-24T16:00:00"
+      },
+      {
+        "dive_id": "DIVE-013",
+        "latitude": 17.25,
+        "longitude": 66.0,
+        "depth_m": 50.0,
+        "temperature": 20.23,
+        "salinity": 35.18,
+        "chlorophyll": 1.402,
+        "timestamp": "2026-08-24T20:00:00"
+      },
+      {
+        "dive_id": "DIVE-014",
+        "latitude": 17.4375,
+        "longitude": 65.8333,
+        "depth_m": 686.4,
+        "temperature": 2.8,
+        "salinity": 36.08,
+        "chlorophyll": 0.02,
+        "timestamp": "2026-08-25T00:00:00"
+      },
+      {
+        "dive_id": "DIVE-015",
+        "latitude": 17.625,
+        "longitude": 65.6667,
+        "depth_m": 950.0,
+        "temperature": 2.8,
+        "salinity": 36.15,
+        "chlorophyll": 0.02,
+        "timestamp": "2026-08-25T04:00:00"
+      },
+      {
+        "dive_id": "DIVE-016",
+        "latitude": 17.8125,
+        "longitude": 65.5,
+        "depth_m": 686.4,
+        "temperature": 2.8,
+        "salinity": 36.08,
+        "chlorophyll": 0.02,
+        "timestamp": "2026-08-25T08:00:00"
+      },
+      {
+        "dive_id": "DIVE-017",
+        "latitude": 18.0,
+        "longitude": 65.3333,
+        "depth_m": 50.0,
+        "temperature": 20.23,
+        "salinity": 35.18,
+        "chlorophyll": 1.402,
+        "timestamp": "2026-08-25T12:00:00"
+      },
+      {
+        "dive_id": "DIVE-018",
+        "latitude": 18.1875,
+        "longitude": 65.1667,
+        "depth_m": 686.4,
+        "temperature": 2.8,
+        "salinity": 36.08,
+        "chlorophyll": 0.02,
+        "timestamp": "2026-08-25T16:00:00"
+      },
+      {
+        "dive_id": "DIVE-019",
+        "latitude": 18.375,
+        "longitude": 65.0,
+        "depth_m": 950.0,
+        "temperature": 2.8,
+        "salinity": 36.15,
+        "chlorophyll": 0.02,
+        "timestamp": "2026-08-25T20:00:00"
+      },
+      {
+        "dive_id": "DIVE-020",
+        "latitude": 18.5625,
+        "longitude": 64.8333,
+        "depth_m": 686.4,
+        "temperature": 2.8,
+        "salinity": 36.08,
+        "chlorophyll": 0.02,
+        "timestamp": "2026-08-26T00:00:00"
+      },
+      {
+        "dive_id": "DIVE-021",
+        "latitude": 18.75,
+        "longitude": 64.6667,
+        "depth_m": 50.0,
+        "temperature": 20.23,
+        "salinity": 35.18,
+        "chlorophyll": 1.402,
+        "timestamp": "2026-08-26T04:00:00"
+      },
+      {
+        "dive_id": "DIVE-022",
+        "latitude": 18.9375,
+        "longitude": 64.5,
+        "depth_m": 686.4,
+        "temperature": 2.8,
+        "salinity": 36.08,
+        "chlorophyll": 0.02,
+        "timestamp": "2026-08-26T08:00:00"
+      },
+      {
+        "dive_id": "DIVE-023",
+        "latitude": 19.125,
+        "longitude": 64.3333,
+        "depth_m": 950.0,
+        "temperature": 2.8,
+        "salinity": 36.15,
+        "chlorophyll": 0.02,
+        "timestamp": "2026-08-26T12:00:00"
+      },
+      {
+        "dive_id": "DIVE-024",
+        "latitude": 19.3125,
+        "longitude": 64.1667,
+        "depth_m": 686.4,
+        "temperature": 2.8,
+        "salinity": 36.08,
+        "chlorophyll": 0.02,
+        "timestamp": "2026-08-26T16:00:00"
+      },
+      {
+        "dive_id": "DIVE-025",
+        "latitude": 19.5,
+        "longitude": 64.0,
+        "depth_m": 50.0,
+        "temperature": 20.23,
+        "salinity": 35.18,
+        "chlorophyll": 1.402,
+        "timestamp": "2026-08-26T20:00:00"
+      }
+    ]
+  }
+]
